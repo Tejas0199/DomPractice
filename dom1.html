@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title> 
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .btn-container{
+            display: flex;
+            justify-content: center;
+            gap : 20px;
+            align-items: center;
+        }
+        h3 {
+            font-size: 30px;
+        }
+        .btn-container>button {
+            padding: 5px 10px;
+            font-size: 20px;
+            background: none;
+            border: 1px solid black;
+            border-radius: 3px;
+            margin: 10px 0;
+        }
+        input {
+            font-size: 20px;
+            padding: 5px;
+            outline: none;
+            border: 1px solid rgb(136, 188, 248);
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="btn-container">
+            <button onclick="onClickButton(-2)">- 2</button>
+            <button onclick="onClickButton(-1)">- 1</button>
+            <h3 id="result">0   </h3>
+            <button onclick="onClickButton(1)">+ 1</button>
+            <button onclick="onClickButton(2)">+ 2</button>
+        </div>
+        <div class="btn-container">
+            <button onclick="onIncDynamic(-1)"> - </button>
+                <input id="uservalue" type="number" placeholder="Enter value"/>
+            <button onclick="onIncDynamic(1)"> + </button>
+        </div>
+    </div>
+    <script>
+        const resultTag = document.getElementById("result");
+        function onClickButton(value) {
+            resultTag.innerText = Number(resultTag.innerText) + value;
+        }
+        const inputTag = document.getElementById("uservalue");
+        function onIncDynamic(value) {
+            resultTag.innerText = (Number(inputTag.value) * value ) + Number(resultTag.innerText);
+        }
+    </script>
+</body>
+</html>

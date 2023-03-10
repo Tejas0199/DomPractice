@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        h1 {
+            padding: 30px 0;
+            background-color: black;
+            color: white;
+            text-align: center;
+            font-family: sans-serif;
+        }
+        .btn-container {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            justify-content: center;
+            margin: 30px 0;
+
+        }
+        .btn-container>button {
+            padding: 10px 20px;
+            background: none;
+            border-radius: 5px;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        .btn-container>button:focus {
+            background-color: rgba(128, 128, 128, 0.265);
+        }
+    </style>
+</head>
+<body>
+    <h1 id="brand">Hello world</h1>
+    <div class="btn-container">
+        <button>Change Color</button>
+        <button>Change Background Color</button>
+    </div>
+    <script>
+        const brand = document.getElementById('brand'); 
+        const btns = document.getElementsByTagName('button');
+        btns[0].addEventListener('click',() => {
+            brand.style.color = "red";
+        })
+        btns[1].addEventListener('click',() => {
+            brand.style.backgroundColor = "cyan"
+        })
+    </script>
+</body>
+</html>

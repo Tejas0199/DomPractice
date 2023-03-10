@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        .btn>button {
+            background: none;
+            border: 2px solid black;
+            font-size: 20px;
+            padding: 10px 20px;
+            transition: all .2s linear;
+            border-radius: 5px;
+        }
+        .btn {
+            text-align: center;
+            margin-top: 50px ;
+        }
+        .btn>button:hover {
+            background-color: rgba(204, 204, 204, 0.478);
+        }
+        .model {
+           
+            width: 700px;
+            padding: 30px;
+            border: 1px solid black;
+            margin: 50px auto;
+            border-radius: 10px;
+            box-shadow: 10px 10px 20px 5px rgba(0, 0, 0, 0.262);
+        }
+        .model>div:nth-child(1) {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .model>div:nth-child(1)>button {
+            padding: 5px 10px;
+            border-radius: 50%;
+            background:none ;
+            font-size: 18px ;
+            border: 1px solid black;
+            transition: all .1s linear;
+        }
+        .model>div:nth-child(1)>button:hover  {
+            color: white;
+            background-color: black;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="btn">
+        <button id="btn">Show Model</button>
+    </div>
+    <div class="model hidden">
+        <div>
+            <h1>Welcome to Jspriders</h1>
+            <button id="close-btn">X</button>
+        </div>
+        <div>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam odio nesciunt obcaecati non exercitationem quasi porro, consequatur praesentium, minus doloremque tempore dignissimos facere unde, ipsa optio atque veritatis velit quam.</p>
+        </div>
+    </div>
+    <script>
+       const btn = document.getElementById("btn");
+       const modal = document.querySelector('.model');
+       btn.addEventListener('click' , () => {
+           if(modal.classList.contains("hidden")) {
+            btn.innerText = "Hide modal"
+           } else {
+            btn.innerText = "Show Modal"
+           }
+           modal.classList.toggle('hidden');
+       })
+       document.getElementById("close-btn").addEventListener('click',() => {
+            modal.classList.add('hidden');
+            btn.innerText = "Show Modal"
+       })
+       window.addEventListener('keydown',(event) => {
+         if(event.keyCode === 27) {
+            modal.classList.add('hidden');
+            btn.innerText = "Show Modal"
+         }
+       })
+    </script>
+</body>
+</html>

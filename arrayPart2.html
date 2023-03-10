@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let arr = [2,4,6,8,10];
+        console.log(arr.every((element,index,array) => {
+            return element % 2 === 0;
+        }));
+        console.log(arr.some((element,index,array) => {
+            return element % 2 === 1;
+        }))
+    </script>
+</body>
+</html>
