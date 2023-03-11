@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: relative;
+            left : calc(50vw - 50px);
+            top : calc(50vh - 50px);
+        }
+    </style>
+</head>
+<body>
+    <div id="face"></div>
+    <script>
+        let val1 = 0;
+        let val2 = 0;
+        const faceContainer = document.getElementById('face');
+        window.addEventListener('keydown',(event) => {
+            console.log(val1,val2,event.keyCode);
+            switch(event.keyCode) {
+                case 37 :
+                    console.log("left")
+                    val2 = val2 - 5;
+                    faceContainer.style.left = `calc(50vw - 50px + ${val2}px)`
+                    break;
+                case 38 :
+                    val1 -= 5;
+                    faceContainer.style.top = `calc(50vh - 50px + ${val1}px)`
+                    break;
+                case 39 : 
+                    val2 += 5;
+                    faceContainer.style.left = `calc(50vw - 50px + ${val2}px )`
+                    break;
+                case 40 :
+                    val1 += 5;
+                    faceContainer.style.top = `calc(50vh - 50px + ${val1}px)`
+                    break;
+                default : 
+                    return;
+            }
+            
+        })
+    </script>
+</body>
+</html>

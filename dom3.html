@@ -38,18 +38,24 @@
     </style>
 </head>
 <body>
-    <h1 id="brand">Hello world</h1>
+    <h1 id="brand">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum quaerat, distinctio dicta praesentium ipsum vero aperiam molestiae at impedit amet suscipit eius doloribus debitis. Obcaecati inventore placeat dolore amet officia.</p>
+    </h1>
     <div class="btn-container">
+        <button>Insert Text</button>
         <button>Change Color</button>
         <button>Change Background Color</button>
     </div>
     <script>
         const brand = document.getElementById('brand'); 
         const btns = document.getElementsByTagName('button');
-        btns[0].addEventListener('click',() => {
-            brand.style.color = "red";
+        btns[0].addEventListener('click', () => {
+            brand.innerHTML = "<span>Hello </span><span>world</span>"
         })
         btns[1].addEventListener('click',() => {
+            brand.style.color = "red";
+        })
+        btns[2].addEventListener('click',() => {
             brand.style.backgroundColor = "cyan"
         })
     </script>
