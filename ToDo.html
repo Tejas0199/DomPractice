@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap.min.css" integrity="sha512-Ez0cGzNzHR1tYAv56860NLspgUGuQw16GiOOp/I2LuTmpSK9xDXlgJz3XN4cnpXWDmkNBKXR/VDMTCnAaEooxA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        ul {
+            list-style: none;
+        }
+        ul>li {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .fa {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-dark py-2">
+        <h1 class="text-info text-center">I'm Remaider<sup class="h3 ms-2">24X7</sup></h1>
+    </div>
+    <main>
+        <div class="container border border-2 border-secondary my-5 py-4 px-5 rounded">
+            <input id="task-input" type="text" placeholder="Enter task" class="form-control"/>
+            <button id="submit-btn" class="btn btn-primary form-control mt-4">SUBMIT</button>
+        </div>
+        <ul id="task-list" class="container border border-2 border-secondary my-5 py-4 px-5 rounded">
+            
+        </ul>
+
+    </main>
+    <script>
+        const input = document.getElementById('task-input');
+        const listContainer = document.getElementById('task-list');
+        const taskList = localStorage.tasks ? JSON.parse(localStorage.getItem('tasks')) : [];
+        document.getElementById('submit-btn').addEventListener('click',() => {
+            taskList.unshift(input.value);
+            localStorage.setItem('tasks',JSON.stringify(taskList));
+            createTaskList()
+        })
+        function createTaskList() {
+            
+            listContainer.innerHTML = ""; 
+            taskList.forEach((task) => {
+                let li = document.createElement('li');
+                li.classList.add('alert');
+                li.classList.add('alert-secondary');
+                let span = document.createElement('span');
+                span.innerText = task;
+                li.appendChild(span);
+                let i = document.createElement('i');
+                addClassList(i,["fa","fa-close","rounded","rounded-circle",'bg-dark']);
+                li.appendChild(i);
+                listContainer.appendChild(li);
+            })
+
+            input.value = "";
+        }
+        createTaskList()
+        function addClassList(element,classes) {
+            classes.forEach( cls => {
+                element.classList.add(cls)
+            })
+        }
+    
+    </script>
+</body>
+</html>
