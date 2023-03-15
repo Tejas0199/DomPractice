@@ -49,22 +49,29 @@
             localStorage.setItem('tasks',JSON.stringify(taskList));
             createTaskList()
         })
+        function deleteTask(index) {
+            taskList.splice(index,1);
+            localStorage.setItem("tasks",JSON.stringify(taskList));
+            createTaskList();
+        }
         function createTaskList() {
             
             listContainer.innerHTML = ""; 
-            taskList.forEach((task) => {
-                let li = document.createElement('li');
-                li.classList.add('alert');
-                li.classList.add('alert-secondary');
-                let span = document.createElement('span');
-                span.innerText = task;
-                li.appendChild(span);
-                let i = document.createElement('i');
-                addClassList(i,["fa","fa-close","rounded","rounded-circle",'bg-dark']);
-                li.appendChild(i);
-                listContainer.appendChild(li);
-            })
 
+            taskList.forEach((task,index) => {
+                const li = document.createElement('li');
+                li.setAttribute("class","alert alert-secondary");
+                const span = document.createElement('span'); 
+                span.textContent = task;
+                li.append(span);
+                const i = document.createElement('i');
+                i.setAttribute('class',"fa fa-close rounded rounded-circle bg-dark");
+                i.addEventListener('click',deleteTask.bind(this,index))
+                li.appendChild(i);
+                
+                listContainer.appendChild(li);
+               
+            })
             input.value = "";
         }
         createTaskList()
