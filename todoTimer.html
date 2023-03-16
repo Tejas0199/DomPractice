@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo Timer</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            font-family: sans-serif;
+        }
+        .timer-container {
+            width: 300px;
+            padding: 30px;
+            border-radius: 100px;
+            border: 2px solid black;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        button {
+            padding: 10px 20px ;
+            border-radius: 5px;
+            border: 1px solid black;
+            font-size: 1rem;
+            font-weight: 600 ;
+            transition:all  .1s linear ;
+        }
+        button:hover {
+            background-color: black;
+            color: white;
+        }
+        .option-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .danger {
+            animation: complete .3s linear 0s infinite alternate;
+        }
+        @keyframes complete {
+            0% {
+                box-shadow: 0px 0px 100px 50px red;
+            } 100% {
+                box-shadow: 0px 0px 50px 25px red;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="timer-container">
+        <h1 id="timer">00 : 00 : 00</h1>
+        <div>
+            <button id="start-btn">START</button>
+            <button id="stop-btn">STOP</button>
+ </div>
+        <div id="option-container" class="option-container">
+            
+        </div>
+    </div>
+    <script>
+        const timerTag = document.getElementById('timer');
+        const btnContainer = document.getElementById('option-container');
+        const options = [0.5,2,5,10,15,20,25,30,60];
+        let secs = null;
+        function getSecsFromMins(mins) {
+            return mins * 60;
+        }
+        function createButtons(btns) {
+            btns.forEach( btn => {
+                const button = document.createElement('button');
+                button.innerText = btn;
+                button.addEventListener('click',() => {
+                   secs = getSecsFromMins(btn);
+                   timerTag.innerText = getTimeFormat(secs);
+                })
+                btnContainer.appendChild(button);
+            });
+        }
+        createButtons(options);
+        
+        let timerId = null;
+
+        function getTimeFormat(s) {
+            let h = Math.trunc(s / (60*60));
+            s = s % 3600;
+            let m = Math.trunc( s / 60);
+            s = s % 60;
+            return `${ h < 10 ? "0" + h : h } : ${m > 9 ? m : "0" + m} : ${s < 10 ? "0" + s : s}`
+        }
+
+        document.getElementById('start-btn').addEventListener('click',() => {
+            if(timerId === null && secs !== null) {
+                timerId = setInterval(() => {
+                    secs--;
+                    timerTag.innerText = getTimeFormat(secs);
+                    if(secs === 0) {
+                        clearInterval(timerId);
+                        timerId = null;
+                        document.querySelector(".timer-container").classList.add("danger");
+                    }
+                },1000)
+            }
+        })
+        document.getElementById('stop-btn').addEventListener('click',() => {
+            clearInterval(timerId);
+            timerId = null
+        })
+    </script>
+</body>
+</html>
