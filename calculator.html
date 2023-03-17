@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            font-family: sans-serif ;
+        }
+        .container {
+            max-width: 50vw;
+            border: 1px solid black;
+            padding: 20px;
+            border-radius: 3px;
+            min-width: 400px;
+            margin: 50px auto;
+        }
+        .container .exp {
+            border: 2px solid rgba(119, 119, 185, 0.644);
+            padding: 10px;
+            border-radius: 3px;
+            margin-bottom: 20px;
+            text-align: end;
+        }
+        .btns-container {
+            border: 1px solid black;
+            border-radius: 3px;
+            display: grid;
+            grid-template-columns: auto auto auto auto;
+            gap : 10px;
+            padding: 20px;
+        }
+        .container .exp .prev-exp {
+            color: gray;
+            height: 15px;
+            padding: 5px 0;
+        }
+        .crt-exp {
+            height: 20px;
+        }
+        .btns-container button {
+            padding: 10px 0;
+            background:none ;
+            border: 1px solid black;
+            border-radius: 3px;
+            font-size: 1rem;
+            transition: all .1s linear;
+        }
+        .bg-red {
+            background-color: rgba(255, 75, 75, 0.533) !important;
+        }
+        .bg-blue {
+            background-color: rgba(83, 137, 255, 0.533) !important;
+        }
+        .bg-red:hover {
+            background-color: rgba(253, 76, 76, 0.81) !important;
+        }
+        .bg-blue:hover {
+            background-color: rgba(83, 137, 255, 0.824) !important;
+        }
+        button:hover {
+            background-color: rgba(128, 128, 128, 0.575);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="exp">
+            <p class="prev-exp"></p>
+            <h2 class="crt-exp"></h2>
+        </div>
+        <div class="btns-container">
+
+        </div>
+    </div>
+    <script>
+        let btns = ['(',')',"%",'AC',7,8,9,'/',4,5,6,'*',1,2,3,'-',0,'.','=','+'];
+        const btnsContainer = document.querySelector('.btns-container');
+        const curExpTag = document.querySelector('.crt-exp');
+        const prevExpTag = document.querySelector('.prev-exp');
+        (() => {
+            btns.forEach( btnText => {
+                const button = document.createElement('button');
+                button.innerText = btnText;
+                if(btnText === "AC") button.classList.add('bg-red');
+                if(btnText === "=") button.classList.add('bg-blue')
+                btnsContainer.appendChild(button);
+            })
+        })()
+        let prevExp = "";
+        let curExp = "";
+        btnsContainer.addEventListener('click',(event) => {
+            let text = event.target.innerText;
+            if(text === "AC") curExp = "";
+            else if(text === "=") {
+                let solution = eval(curExp);
+                prevExp = curExp + " = "
+                curExp = solution;
+                prevExpTag.innerText = prevExp;
+            }
+            else curExp += text;
+            curExpTag.innerText = curExp;
+        })
+    </script>
+</body>
+</html>
