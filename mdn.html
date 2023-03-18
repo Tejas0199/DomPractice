@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        :root {
+            --text-primary : #fff;
+            --text-link : #8cb4ff;
+        }
+        body {
+            background-color: black;
+        }
+        * {
+            padding: 0;
+            margin: 0;
+            font-family: sans-serif;
+        }
+        .navbar {
+            background-color: black;
+            padding: 0 50px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            border-bottom: 1px solid var(--text-primary);
+        }
+        .nav-container {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .brand {
+            width: 80px;
+        }
+        .nav-container>div {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .nav-container>div:nth-child(1) button {
+            background: none;
+            border: none;
+            color: rgb(211, 211, 211);
+        }
+        .nav-container>div:nth-child(1) button:hover {
+            cursor: pointer;
+        }
+        .nav-list-container {
+            position: relative;
+            padding: 12px 0;
+        }
+
+        .list-container {
+            position: absolute;
+            background-color: black;
+            width: 250px;
+            padding: 5px;
+            border-radius: 5px ;
+            transform: translateY(12px);
+            border: 1px solid var(--text-primary);
+        }
+        .list-container a {
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+        .list-container .list-description {
+            color: gray;
+            font-size: .7rem;
+        }
+        .list-container .list-heading {
+            font-size: 0.7rem;
+        }   
+        .list-items {
+            padding: 5px 10px;
+            border-radius: 3px;
+        }
+        .list-items:hover {
+            background-color: rgba(128, 128, 128, 0.248);
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="brand">
+            <a href="">
+                <svg id="mdn-docs-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 361 104.2" style="enable-background:new 0 0 361 104.2" xml:space="preserve" role="img"><title>MDN Web Docs</title><path d="M197.6 73.2h-17.1v-5.5h3.8V51.9c0-3.7-.7-6.3-2.1-7.9-1.4-1.6-3.3-2.3-5.7-2.3-3.2 0-5.6 1.1-7.2 3.4s-2.4 4.6-2.5 6.9v15.6h6v5.5h-17.1v-5.5h3.8V51.9c0-3.8-.7-6.4-2.1-7.9-1.4-1.5-3.3-2.3-5.6-2.3-3.2 0-5.5 1.1-7.2 3.3-1.6 2.2-2.4 4.5-2.5 6.9v15.8h6.9v5.5h-20.2v-5.5h6V42.4h-6.1v-5.6h13.4v6.4c1.2-2.1 2.7-3.8 4.7-5.2 2-1.3 4.4-2 7.3-2s5.3.7 7.5 2.1c2.2 1.4 3.7 3.5 4.5 6.4 1.1-2.5 2.7-4.5 4.9-6.1s4.8-2.4 7.9-2.4c3.5 0 6.5 1.1 8.9 3.3s3.7 5.6 3.7 10.2v18.2h6.1v5.5zm42.5 0h-13.2V66c-1.2 2.2-2.8 4.1-4.9 5.6-2.1 1.6-4.8 2.4-8.3 2.4-4.8 0-8.7-1.6-11.6-4.9-2.9-3.2-4.3-7.7-4.3-13.3 0-5 1.3-9.6 4-13.7 2.6-4.1 6.9-6.2 12.8-6.2s9.8 2.2 12.3 6.5V22.7h-8.6v-5.6h15.8v50.6h6v5.5zm-13.3-16.8V52c-.1-3-1.2-5.5-3.2-7.3s-4.4-2.8-7.2-2.8c-3.6 0-6.3 1.3-8.2 3.9-1.9 2.6-2.8 5.8-2.8 9.6 0 4.1 1 7.3 3 9.5s4.5 3.3 7.4 3.3c3.2 0 5.8-1.3 7.8-3.8 2.1-2.6 3.1-5.3 3.2-8zm61.5 16.8H269v-5.5h6V51.9c0-3.7-.7-6.3-2.2-7.9-1.4-1.6-3.4-2.3-5.7-2.3-3.1 0-5.6 1-7.4 3s-2.8 4.4-2.9 7v15.9h6v5.5h-19.3v-5.5h6V42.4h-6.2v-5.6h13.6V43c2.6-4.6 6.8-6.9 12.7-6.9 3.6 0 6.7 1.1 9.2 3.3s3.7 5.6 3.7 10.2v18.2h6v5.4h-.2z" style="fill:var(--text-primary)"></path><g style="fill:var(--text-link)"><path d="M42 .2 13.4 92.3H1.7L30.2.2H42zM52.4.2v92.1H42V.2h10.4zm40.3 0L64.2 92.3H52.5L81 .2h11.7zM103.1.2v92.1H92.7V.2h10.4zM294 95h67v8.8h-67V95z"></path></g></svg>
+            </a>
+        </div>
+        <div class="nav-container">
+            <div>
+                <div id="referance" class="nav-list-container">
+                    <a href="">
+                        <button>Referance</button>
+                    </a>
+                    <ul id="referance-links" class="list-container hidden">
+                        <li class="list-items">
+                            <a href="">
+                                <h5 class="list-heading">HTML</h5>
+                                <p class="list-description">It i used to create layout of web pages</p>
+                            </a>
+                        </li>
+                        <li class="list-items">
+                            <a href="">
+                                <h5 class="list-heading">CSS</h5>
+                                <p class="list-description">It i used to create layout of web pages</p>
+                            </a>
+                        </li>
+                        <li class="list-items">
+                            <a href="">
+                                <h5 class="list-heading">Java Script</h5>
+                                <p class="list-description">It i used to create layout of web pages</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <button>Guides</button>
+                </div>
+                <div>
+                    <button>MDN plus</button>
+                </div>
+            </div>
+            <div>
+                <div><button>Theme</button></div>
+                <div><button>login</button></div>
+                <div><button>Get MDN plus</button></div>
+            </div>
+        </div>
+    </nav>
+    <script>
+        const referContainer = document.getElementById('referance');
+        const linksContainer = document.getElementById('referance-links');
+        referContainer.addEventListener('mouseenter',() => {
+            linksContainer.classList.remove('hidden')
+        })
+        referContainer.addEventListener('mouseleave',() => {
+            linksContainer.classList.add('hidden')
+        })
+    </script>
+</body>
+</html>

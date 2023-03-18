@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 200px;
+            height: 200px;
+            border: 2px solid black;
+            background-color: gray;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+        }
+        h2 {
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="click">
+         <h2>click</h2>
+    </div>
+    <div id="mouseenter">
+        <h2>Mouse Enter</h2>
+   </div>
+   <div id="mouseout">
+    <h2>Mouse out</h2>
+</div>
+<div id="mouseleave">
+    <h2>Mouse leave</h2>
+</div>
+<div id="mousemove">
+    <h2>Mouse move</h2>
+</div>
+<div id="dbclick">
+    <h2>Mouse dbclick</h2>
+</div>
+<input type="text"/>
+    <script>
+        document.getElementById('click').addEventListener('click',() => {
+            console.log("clicked");
+        })
+        document.getElementById('mouseenter').addEventListener('mouseenter',() => {
+            console.log("mouse Enter")
+        })
+        document.getElementById('mouseout').addEventListener('mouseout',() => {
+            console.log("mouse out")
+        })
+        document.getElementById('mouseleave').addEventListener('mouseleave',() => {
+            console.log("mouse leave")
+        })
+        document.getElementById('mousemove').addEventListener('mousemove',() => {
+            console.log("mouse leave")
+        })
+        document.getElementById('dbclick').addEventListener('dblclick',() => {
+            console.log("mouse dbclick")
+        })
+        let inputTag = document.querySelector('input')
+        inputTag.addEventListener('focus',() => {
+            console.log("focused on input tag")
+        })
+        inputTag.addEventListener('blur',() => {
+            console.log("blur from input tag")
+        })
+    </script>
+
+</body>
+</html>
