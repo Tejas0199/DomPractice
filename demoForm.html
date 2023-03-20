@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jspider</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css" integrity="sha512-SbiR/eusphKoMVVXysTKG/7VseWii+Y3FdHrt0EpKgpToZeemhqHeZeLWLhJutz/2ut2Vw1uQEj2MbRF+TVBUA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        #skillsContainer {
+            padding: 10px;
+            border: 1px solid black;
+            border-radius: 3px;
+            display: flex;
+            flex-wrap: wrap;
+            gap : 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container">
+            <a href="" class="nav-brand text-light text-decoration-none fs-3">Jspider</a>
+        </div>
+    </nav>
+    <main>
+        <form>
+            <div class="container container-md border border-primary rounded mt-5  my-auto p-2 p-md-5">
+                <div class="row mt-2">
+                    <div class="col-12 col-md-6">
+                        <label for="fname">First Name</label>
+                        <input id="fname" name="firstName" class="form-control" type="text"/>
+                        <p class="text-danger" id="firstNameError">Please Enter valid Name</p>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <label for="lname">Last Name</label>
+                        <input id="lname" class="form-control" type="text"/>
+                        <p class="text-danger">Please Enter valid Name</p>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-12 col-md-6">
+                        <label for="fname">Father Name</label>
+                        <input id="fname" class="form-control" type="text"/>
+                        <p class="text-danger">Please Enter valid Name</p>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <label for="lname">Enter Gmail </label>
+                        <input id="lname" class="form-control" type="text"/>
+                        <p class="text-danger">Please Enter valid Name</p>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-12 col-md-6">
+                        <label for="fname">Phone</label>
+                        <div class="row">
+                            <div class="col-2">
+                                <select class=" form-select">
+                                    <option value="+91">+91</option>
+                                    <option value="+92">+92</option>
+                                    <option value="+93">+93</option>
+                                    <option value="+94">+94</option>
+                                    <option value="+95">+95</option>
+                                    <option value="">+96</option>
+                                    <option value="">+97</option>
+                                    <option value="">+98</option>
+                                    <option value="">+99</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control"/>
+                            </div>
+                            <p class="text-danger">Please Enter valid Name</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <label for="lname">Enter Gmail </label>
+                        <div class="row">
+                            <div class="col-6">
+                                <input type="radio" name="gender" id="male" class="form-check-input">
+                                <label for="male">Male</label>
+                            </div>
+                            <div class="col-6">
+                                <input type="radio" name="gender" id="female" class="form-check-input">
+                                <label for="female">Female</label>
+                            </div>
+                            <p class="text-danger">Please Enter valid Name</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-12 col-md-6">
+                        <label for="fname">Skills</label>
+                        <select id="skils-select-box" class="form-select" >
+                            <option>Select Skills</option>
+                        </select>
+                        <p class="text-danger">Please Enter valid Name</p>
+                        <div id="skillsContainer"></div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <label for="lname">Enter Gmail </label>
+                        <select class="form-select">
+                            <option value="">Select course</option>
+                            <option value="MERN">MERN Fullstack</option>
+                            <option value="JAVA">JAVA Fullstack</option>
+                            <option value="PYTHON">Python Fullstack</option>
+                        </select>
+                        <p class="text-danger">Please Enter valid Name</p>  
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col">
+                        <input id="notarobot" type="checkbox" class="form-check-input">
+                        <label for="notarobot">I'm not a Robot</label>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col text-center">
+                        <button class="btn btn-primary col-5">Submit</button>
+                    </div>
+                </div>
+            </div>
+            
+        </form>
+    </main>
+    <script>
+        const skillsConfig = ["HTML","CSS","JavaScript","Java","C++","Bootstrap 5","ReactJS","MongoDB","NodeJS","expressJS"];
+        const studentSkills = [];
+       
+        const skillsSelector = document.getElementById('skils-select-box');
+        (() => {
+            
+            skillsConfig.forEach((skill) => {
+                const option = document.createElement('option');
+                option.innerText = skill;
+                option.setAttribute('value',skill);
+                skillsSelector.appendChild(option);
+            })
+        })()
+        skillsSelector.addEventListener('change',(event) => {
+            const skill = event.target.value;
+            if(! studentSkills.includes(skill)) {
+                studentSkills.push(event.target.value);
+                createSkillButton(studentSkills);
+            }
+        })
+        function delectSkill(index) {
+            studentSkills.splice(index,1);
+            createSkillButton(studentSkills);
+        }
+        function createSkillButton(skillList) {
+            const skillsContainer = document.getElementById('skillsContainer');
+            skillsContainer.innerHTML = ""; 
+            skillList.forEach( (skill,index) => {
+                const button = document.createElement('button');
+                button.setAttribute('class',"btn btn-sm btn-primary px-3 rounded rounded-pill")
+                button.setAttribute('type',"button");
+                const span = document.createElement('span');
+                span.innerText = skill;
+                button.appendChild(span);
+                const i = document.createElement('i');
+                i.setAttribute('class',"fa fa-circle-xmark ms-2");
+                i.addEventListener('click',delectSkill.bind(this,index))
+                button.appendChild(i);
+                skillsContainer.appendChild(button);
+            })
+        }
+    </script>
+</body>
+</html>
