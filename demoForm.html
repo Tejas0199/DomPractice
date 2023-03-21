@@ -26,7 +26,7 @@
         </div>
     </nav>
     <main>
-        <form>
+        <form id="studentFrom">
             <div class="container container-md border border-primary rounded mt-5  my-auto p-2 p-md-5">
                 <div class="row mt-2">
                     <div class="col-12 col-md-6">
@@ -36,19 +36,19 @@
                     </div>
                     <div class="col-12 col-md-6">
                         <label for="lname">Last Name</label>
-                        <input id="lname" class="form-control" type="text"/>
+                        <input id="lname" name="lastName" class="form-control" type="text"/>
                         <p class="text-danger">Please Enter valid Name</p>
                     </div>
                 </div>
                 <div class="row mt-2">
                     <div class="col-12 col-md-6">
                         <label for="fname">Father Name</label>
-                        <input id="fname" class="form-control" type="text"/>
+                        <input id="fname" name="fatherName" class="form-control" type="text"/>
                         <p class="text-danger">Please Enter valid Name</p>
                     </div>
                     <div class="col-12 col-md-6">
                         <label for="lname">Enter Gmail </label>
-                        <input id="lname" class="form-control" type="text"/>
+                        <input id="lname" name="email" class="form-control" type="text"/>
                         <p class="text-danger">Please Enter valid Name</p>
                     </div>
                 </div>
@@ -57,7 +57,7 @@
                         <label for="fname">Phone</label>
                         <div class="row">
                             <div class="col-2">
-                                <select class=" form-select">
+                                <select name="countryCode" class=" form-select">
                                     <option value="+91">+91</option>
                                     <option value="+92">+92</option>
                                     <option value="+93">+93</option>
@@ -70,20 +70,20 @@
                                 </select>
                             </div>
                             <div class="col">
-                                <input type="text" class="form-control"/>
+                                <input type="text" name="phone" class="form-control"/>
                             </div>
                             <p class="text-danger">Please Enter valid Name</p>
                         </div>
                     </div>
                     <div class="col-12 col-md-6">
-                        <label for="lname">Enter Gmail </label>
+                        <label for="lname">Gender </label>
                         <div class="row">
                             <div class="col-6">
-                                <input type="radio" name="gender" id="male" class="form-check-input">
+                                <input type="radio" value="male" name="gender" id="male" class="form-check-input">
                                 <label for="male">Male</label>
                             </div>
                             <div class="col-6">
-                                <input type="radio" name="gender" id="female" class="form-check-input">
+                                <input type="radio" value="female" name="gender" id="female" class="form-check-input">
                                 <label for="female">Female</label>
                             </div>
                             <p class="text-danger">Please Enter valid Name</p>
@@ -100,8 +100,8 @@
                         <div id="skillsContainer"></div>
                     </div>
                     <div class="col-12 col-md-6">
-                        <label for="lname">Enter Gmail </label>
-                        <select class="form-select">
+                        <label for="lname">Course </label>
+                        <select name="course" class="form-select">
                             <option value="">Select course</option>
                             <option value="MERN">MERN Fullstack</option>
                             <option value="JAVA">JAVA Fullstack</option>
@@ -126,8 +126,19 @@
         </form>
     </main>
     <script>
+        const studentData = {
+            firstName : "",
+            lastName : "",
+            fatherName : "",
+            email : "",
+            countryCode : "",
+            phone : null ,
+            gender : "",
+            course : "", 
+            skilldList : []
+        }
         const skillsConfig = ["HTML","CSS","JavaScript","Java","C++","Bootstrap 5","ReactJS","MongoDB","NodeJS","expressJS"];
-        const studentSkills = [];
+        const studentSkills = studentData.skilldList;
        
         const skillsSelector = document.getElementById('skils-select-box');
         (() => {
@@ -167,6 +178,20 @@
                 skillsContainer.appendChild(button);
             })
         }
+        const FORM = document.getElementById('studentFrom');
+
+        FORM.addEventListener('input',(event) => {
+            let name = event.target.name;
+            if(name === "phone")
+                studentData[event.target.name] = Number(event.target.value);
+            else {
+                studentData[event.target.name] = event.target.value;
+            }
+        })
+         FORM.addEventListener('submit',(event) => {
+            event.preventDefault()
+            console.log("tejas")
+         })
     </script>
 </body>
 </html>
