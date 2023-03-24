@@ -22,6 +22,7 @@
 <body>
     <nav class="navbar navbar-dark bg-dark">
         <div class="container">
+            
             <a href="" class="nav-brand text-light text-decoration-none fs-3">Jspider</a>
         </div>
     </nav>
@@ -30,31 +31,31 @@
             <div class="container container-md border border-primary rounded mt-5  my-auto p-2 p-md-5">
                 <div class="row mt-2">
                     <div class="col-12 col-md-6">
-                        <label for="fname">First Name</label>
+                        <label for="fname">First Name<span class="text-danger">*</span></label>
                         <input id="fname" name="firstName" class="form-control" type="text"/>
-                        <p class="text-danger" id="firstNameError">Please Enter valid Name</p>
+                        <p class="text-danger" id="firstNameError"></p>
                     </div>
                     <div class="col-12 col-md-6">
                         <label for="lname">Last Name</label>
                         <input id="lname" name="lastName" class="form-control" type="text"/>
-                        <p class="text-danger">Please Enter valid Name</p>
+                        <p class="text-danger"></p>
                     </div>
                 </div>
                 <div class="row mt-2">
                     <div class="col-12 col-md-6">
                         <label for="fname">Father Name</label>
                         <input id="fname" name="fatherName" class="form-control" type="text"/>
-                        <p class="text-danger">Please Enter valid Name</p>
+                        <p id="fatherNameError" class="text-danger"></p>
                     </div>
                     <div class="col-12 col-md-6">
                         <label for="lname">Enter Gmail </label>
                         <input id="lname" name="email" class="form-control" type="text"/>
-                        <p class="text-danger">Please Enter valid Name</p>
+                        <p id="emailError" class="text-danger"></p>
                     </div>
                 </div>
                 <div class="row mt-2">
                     <div class="col-12 col-md-6">
-                        <label for="fname">Phone</label>
+                        <label for="fname">Phone<span class="text-danger">*</span></label>
                         <div class="row">
                             <div class="col-2">
                                 <select name="countryCode" class=" form-select">
@@ -72,7 +73,7 @@
                             <div class="col">
                                 <input type="text" name="phone" class="form-control"/>
                             </div>
-                            <p class="text-danger">Please Enter valid Name</p>
+                            <p id="phoneError" class="text-danger"></p>
                         </div>
                     </div>
                     <div class="col-12 col-md-6">
@@ -189,9 +190,68 @@
             }
         })
          FORM.addEventListener('submit',(event) => {
-            event.preventDefault()
-            console.log("tejas")
+            if(validateName(FORM.firstName)) {
+                if(validateName(FORM.fatherName)) {
+                    if(validatePhoneNumber(FORM.phone)) {
+
+                    }
+                }
+            }
+            
+            if(! false ) event.preventDefault();
+            console.log("tejas");
          })
+        function validatePhoneNumber(tag) {
+            const value = tag.value;
+            const name = tag.name;
+            if(value) {
+                    if(/^[6-9][0-9]{9}$/.test(value)) {
+                    displayError(name,"");
+                    return true;
+                } else {
+                    tag.focus();
+                    displayError(name,"Please enter valid input");
+                    return false;
+                }
+            } else {
+
+                displayError(name,"Field should not be empty");
+                tag.focus();
+                return false;
+            }
+        }
+         function validateName(tag) {
+            const value = tag.value;
+            const name = tag.name;
+            if(value) {
+                if(/^[A-Z]/.test(value)) {
+                    if(/[!@#$%^&*()_+|\/.,><:";"''-]/.test(value)) {
+                        tag.focus();
+                        displayError(name,"Please Enter Valid name");
+                        return false;
+                    }
+                    else {
+                        
+                        displayError(name,"")
+                        return true;
+                    }
+                } else {
+                    tag.focus();
+                    displayError(name,"Field should starts with Upper case")
+                    return false;
+                }
+                
+            } else {
+                tag.focus();
+                displayError(name,"Feild should not be empty")
+                return false;
+            }
+         }
+         function displayError(id,msg) {
+            document.getElementById(id + "Error").innerHTML = msg ? `<i class="fa-solid fa-triangle-exclamation"></i> ${msg}` : msg;
+         }
+
+         
     </script>
 </body>
 </html>
