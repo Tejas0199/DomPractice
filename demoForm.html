@@ -57,17 +57,17 @@
                     <div class="col-12 col-md-6">
                         <label for="fname">Phone<span class="text-danger">*</span></label>
                         <div class="row">
-                            <div class="col-2">
+                            <div class="col-3">
                                 <select name="countryCode" class=" form-select">
                                     <option value="+91">+91</option>
                                     <option value="+92">+92</option>
                                     <option value="+93">+93</option>
                                     <option value="+94">+94</option>
                                     <option value="+95">+95</option>
-                                    <option value="">+96</option>
-                                    <option value="">+97</option>
-                                    <option value="">+98</option>
-                                    <option value="">+99</option>
+                                    <option value="+96">+96</option>
+                                    <option value="+97">+97</option>
+                                    <option value="+98">+98</option>
+                                    <option value="+99">+99</option>
                                 </select>
                             </div>
                             <div class="col">
@@ -77,7 +77,7 @@
                         </div>
                     </div>
                     <div class="col-12 col-md-6">
-                        <label for="lname">Gender </label>
+                        <label for="lname">Gender <span class="text-danger">*</span></label>
                         <div class="row">
                             <div class="col-6">
                                 <input type="radio" value="male" name="gender" id="male" class="form-check-input">
@@ -87,28 +87,28 @@
                                 <input type="radio" value="female" name="gender" id="female" class="form-check-input">
                                 <label for="female">Female</label>
                             </div>
-                            <p class="text-danger">Please Enter valid Name</p>
+                            <p id="genderError" class="text-danger"></p>
                         </div>
                     </div>
                 </div>
                 <div class="row mt-2">
                     <div class="col-12 col-md-6">
                         <label for="fname">Skills</label>
-                        <select id="skils-select-box" class="form-select" >
+                        <select id="skils-select-box"  class="form-select" >
                             <option>Select Skills</option>
                         </select>
-                        <p class="text-danger">Please Enter valid Name</p>
+                        <p id="skillsError" class="text-danger"></p>
                         <div id="skillsContainer"></div>
                     </div>
                     <div class="col-12 col-md-6">
-                        <label for="lname">Course </label>
+                        <label for="lname">Course <span class="text-danger">*</span></label>
                         <select name="course" class="form-select">
                             <option value="">Select course</option>
                             <option value="MERN">MERN Fullstack</option>
                             <option value="JAVA">JAVA Fullstack</option>
                             <option value="PYTHON">Python Fullstack</option>
                         </select>
-                        <p class="text-danger">Please Enter valid Name</p>  
+                        <p id="courseError" class="text-danger"></p>  
                     </div>
                 </div>
                 <div class="row mt-2">
@@ -190,16 +190,11 @@
             }
         })
          FORM.addEventListener('submit',(event) => {
-            if(validateName(FORM.firstName)) {
-                if(validateName(FORM.fatherName)) {
-                    if(validatePhoneNumber(FORM.phone)) {
-
-                    }
-                }
+            event.preventDefault();
+            if((validateName(FORM.firstName) && validateName(FORM.fatherName) && validateEmail(FORM.email) && validatePhoneNumber(FORM.phone))) {
+                
             }
             
-            if(! false ) event.preventDefault();
-            console.log("tejas");
          })
         function validatePhoneNumber(tag) {
             const value = tag.value;
@@ -246,6 +241,25 @@
                 displayError(name,"Feild should not be empty")
                 return false;
             }
+         }
+         function validateEmail(tag) {
+            const value = tag.value;
+            const name = tag.name;
+            if(value) {
+                if(value.includes('@') && /.com$/.test(value) && (! /[!#$%^&*()_+|\/,><:";"''-]/.test(value))) {
+                    displayError(name,"");
+                    return true;
+                } else {
+                    tag.focus();
+                    displayError(name,"Invalid gmail");
+                    return false;
+                }
+            } else {
+                tag.focus();
+                displayError(name,"Feild should not be empty")
+                return false;
+            }
+
          }
          function displayError(id,msg) {
             document.getElementById(id + "Error").innerHTML = msg ? `<i class="fa-solid fa-triangle-exclamation"></i> ${msg}` : msg;
